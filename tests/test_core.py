@@ -1,15 +1,11 @@
-# tests/test_core.py
-
 import pytest
 import sys
 import os
 import pandas as pd
 import json
 
-# setup.py が正しく機能すれば、このようにインポートできるはず
 from webdetakit.core import fetch_html, extract_text, extract_attribute, normalize_to_dataframe, save_dataframe_to_csv, save_dataframe_to_json
 
-# example.com はテスト用のドメインなので、実際のコンテンツが期待できます
 TEST_URL_SUCCESS = "https://www.example.com"
 TEST_URL_FAIL = "https://this-is-a-non-existent-domain-1234567890.com"
 
@@ -27,7 +23,6 @@ DUMMY_HTML = """
 </html>
 """
 
-# テスト用のダミーデータ
 DUMMY_DATA_VALID = {
     "Name": ["Alice", "Bob"],
     "Age": [30, 24],
@@ -41,7 +36,7 @@ DUMMY_DATA_INVALID = {
 
 def test_fetch_html_success():
     """
-    有効なURLからHTMLが正常に取得できるかテストします。
+    有効なURLからHTMLが正常に取得できるかテスト。
     """
     html_content = fetch_html(TEST_URL_SUCCESS)
     assert isinstance(html_content, str)
@@ -50,28 +45,28 @@ def test_fetch_html_success():
 
 def test_fetch_html_failure():
     """
-    存在しないURLやアクセスできないURLの場合に空文字列が返されるかテストします。
+    存在しないURLやアクセスできないURLの場合に空文字列が返されるかテスト。
     """
     html_content = fetch_html(TEST_URL_FAIL)
     assert html_content == ""
 
 def test_extract_text_h1():
     """
-    H1タグのテキストが正しく抽出されるかテストします。
+    H1タグのテキストが正しく抽出されるかテスト。
     """
     extracted_texts = extract_text(DUMMY_HTML, "h1")
     assert extracted_texts == ["Main Title"]
 
 def test_extract_text_class():
     """
-    特定のクラスを持つPタグのテキストが正しく抽出されるかテストします。
+    特定のクラスを持つPタグのテキストが正しく抽出されるかテスト。
     """
     extracted_texts = extract_text(DUMMY_HTML, "p.intro")
     assert extracted_texts == ["This is an introduction."]
 
 def test_extract_attribute_href():
     """
-    Aタグのhref属性が正しく抽出されるかテストします。
+    Aタグのhref属性が正しく抽出されるかテスト。
     """
     extracted_attrs = extract_attribute(DUMMY_HTML, "a", "href")
     assert "/page1" in extracted_attrs
@@ -80,14 +75,14 @@ def test_extract_attribute_href():
 
 def test_extract_attribute_src():
     """
-    Imgタグのsrc属性が正しく抽出されるかテストします。
+    Imgタグのsrc属性が正しく抽出されるかテスト。
     """
     extracted_attrs = extract_attribute(DUMMY_HTML, "img", "src")
     assert extracted_attrs == ["/image.png"]
 
 def test_normalize_to_dataframe_valid_data():
     """
-    有効なデータが正しくDataFrameに正規化されるかテストします。
+    有効なデータが正しくDataFrameに正規化されるかテスト。
     """
     df = normalize_to_dataframe(DUMMY_DATA_VALID)
     assert isinstance(df, pd.DataFrame)
@@ -98,14 +93,14 @@ def test_normalize_to_dataframe_valid_data():
 
 def test_normalize_to_dataframe_invalid_data():
     """
-    長さの異なるリストが渡された場合にValueErrorが発生するかテストします。
+    長さの異なるリストが渡された場合にValueErrorが発生するかテスト。
     """
     with pytest.raises(ValueError, match="Length mismatch for key"):
         normalize_to_dataframe(DUMMY_DATA_INVALID)
 
 def test_normalize_to_dataframe_empty_data():
     """
-    空の辞書が渡された場合に空のDataFrameが返されるかテストします。
+    空の辞書が渡された場合に空のDataFrameが返されるかテスト。
     """
     df = normalize_to_dataframe({})
     assert isinstance(df, pd.DataFrame)
@@ -113,7 +108,7 @@ def test_normalize_to_dataframe_empty_data():
 
 def test_save_dataframe_to_csv(tmp_path):
     """
-    DataFrameが正しくCSVファイルに保存されるかテストします。
+    DataFrameが正しくCSVファイルに保存されるかテスト。
     """
     df = pd.DataFrame(DUMMY_DATA_VALID)
     file_path = tmp_path / "test_output.csv"
@@ -126,7 +121,7 @@ def test_save_dataframe_to_csv(tmp_path):
 
 def test_save_dataframe_to_json(tmp_path):
     """
-    DataFrameが正しくJSONファイルに保存されるかテストします。
+    DataFrameが正しくJSONファイルに保存されるかテスト。
     """
     df = pd.DataFrame(DUMMY_DATA_VALID)
     file_path = tmp_path / "test_output.json"
