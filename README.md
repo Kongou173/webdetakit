@@ -14,7 +14,7 @@ WebDetaKit は、ウェブサイトから情報を効率的に抽出し、構造
 WebDetaKit は `pip` を使って簡単にインストールできます
 
 ```bash
-pip install webdetakit使用方法
+pip install webdetakit
 ```
 # コード例
 ## 1. HTMLコンテンツの取得
