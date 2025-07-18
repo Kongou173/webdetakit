@@ -9,8 +9,8 @@ package_source_dir = os.path.join(current_dir, 'webdetakit')
 setup(
     name="webdetakit",
     version="0.1.0",
-    author="Your Name",
-    author_email="your.email@example.com",
+    author="kongou",
+    author_email="jifengtongsheng@gmail,com",
     description="A powerful toolkit for web scraping and data normalization.",
     long_description=open(os.path.join(current_dir, "README.md"), encoding="utf-8").read(),
     long_description_content_type="text/markdown",
