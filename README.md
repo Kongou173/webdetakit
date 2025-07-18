@@ -1,6 +1,6 @@
 # WebDetaKit
 
-WebDetaKit は、ウェブサイトから情報を効率的に抽出し、構造化されたデータ（CSV、JSON、Pandas DataFrame）に正規化するためのPythonツールキットです。シンプルなAPIで、ウェブスクレイピングの基本的なニーズに対応します。
+WebDetaKit は、ウェブサイトから情報を効率的に抽出し、構造化されたデータ（CSV、JSON、Pandas DataFrame）に正規化するためのPythonパッケージです。
 
 ## 主な機能
 
